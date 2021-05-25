@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="container">
       <h1>Nome Utilizador</h1>
 
@@ -67,8 +66,21 @@
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          @click="addExpensive()"
+          type="submit"
+          class="btn btn-primary">
+          
+          Adicionar Despesa
+        </button>
       </form>
+      
+      <div class="mt-3"
+        v-for="expense in expenses"
+        :key="expense.id">
+
+        {{ expense.type }}: {{ expense.value + '€'}}
+      </div>
     </div>
   </div>
 </template>
@@ -78,7 +90,6 @@ export default {
   data () {
     return {
       expense: {
-        id: null,
         type: null,
         description: '',
         value: '',
@@ -113,6 +124,31 @@ export default {
           description: 'Outro'
         }
       ]
+    }
+  },
+
+  methods: {
+    addExpensive() {
+      let newExpense = {
+        id: this.expenses.length + 1,
+        type: this.expense.type.description,
+        description: this.expense.description,
+        value: this.expense.value,
+        date: this.expense.date
+      }
+
+      this.expenses.push(newExpense)      
+
+      this.clearForm()
+    },
+
+    clearForm() {
+      this.expense = {
+        type: null,
+        description: '',
+        value: '',
+        date: ''
+      }
     }
   }
 }
