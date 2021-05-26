@@ -65,7 +65,7 @@
                 type="number"
                 class="form-control"
                 placeholder="Valor"
-                v-model="expense.value">
+                v-model.number="expense.value">
 
               <span class="input-group-text">€</span>
             </div>
@@ -91,19 +91,28 @@
           <button
             @click="addExpensive()"
             type="submit"
-            class="btn btn-primary">
+            class="btn btn-primary mb-5">
 
             Adicionar Despesa
           </button>
         </div>
       </form>
 
-      <div class="mt-3"
+      <div class="mt-3 mb-3"
         v-for="expense in expenses"
         :key="expense.id">
 
         {{ expense.name }}: {{ expense.type + ' com valor pendente de '}} {{ expense.value + '€'}}
+
+        <button
+          @click="totalExpenseByType()"
+          type="submit"
+          class="btn btn-primary">
+
+          Total
+        </button>
       </div>
+
 
       <Income />
     </div>
@@ -125,7 +134,8 @@ export default {
         type: null,
         description: '',
         value: '',
-        date: ''
+        date: '',
+        total: ''
       },
 
       expenses: [],
@@ -133,27 +143,32 @@ export default {
       types: [
         {
           id: 1,
-          description: 'Luz'
+          description: 'Luz',
+          totalExpense: 0
         },
 
         {
           id: 2,
-          description: 'Água'
+          description: 'Água',
+          totalExpense: 0
         },
 
         {
           id: 3,
-          description: 'Gás'
+          description: 'Gás',
+          totalExpense: 0
         },
 
         {
           id: 4,
-          description: 'Renda'
+          description: 'Renda',
+          totalExpense: 0
         },
 
         {
           id: 5,
-          description: 'Outro'
+          description: 'Outro',
+          totalExpense: 0
         }
       ]
     }
@@ -172,6 +187,13 @@ export default {
 
       this.expenses.push(newExpense)
 
+      for (let i = 0; i < this.types.length; i++) {
+
+        if (this.types[i].id === this.expense.type.id) {
+          this.types[i].totalExpense += this.expense.value
+        }
+      }
+
       this.clearForm()
     },
 
@@ -182,6 +204,10 @@ export default {
         value: '',
         date: ''
       }
+    },
+
+    totalExpenseByType() {
+      this.expenses.value = this.totalExpense
     }
   }
 }
