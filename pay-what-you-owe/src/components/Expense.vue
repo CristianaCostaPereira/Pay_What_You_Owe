@@ -186,12 +186,12 @@ export default {
   computed: {
     totalDepts () {
       let debt = this.types.map(debt => debt.totalExpense);
-      let sumExpenses = 0
+      let summaryOfMyExpenses = 0
 
-      for(let i = 0; i < debt.length; i++) {
-        sumExpenses += debt[i]
+      for (let i = 0; i < debt.length; i++) {
+        summaryOfMyExpenses += debt[i]
       }
-      return sumExpenses
+      return summaryOfMyExpenses
     }
   },
 
