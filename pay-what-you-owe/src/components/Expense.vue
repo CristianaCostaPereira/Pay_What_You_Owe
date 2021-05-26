@@ -4,7 +4,7 @@
       <h1 class="mb-3">Paga o que Deves</h1>
 
       <form @submit.prevent>
-        <div class="mb-3">
+        <div class="mb-5">
           <label
             for="name"
             class="form-label">

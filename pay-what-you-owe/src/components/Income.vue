@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="container">
-      <h1>Proveitos</h1>
 
       <form @submit.prevent>
         <div class="mb-3">
+          <h3>Proveitos</h3>
+
           <label class="form-label">Tipo de proveito:</label>
 
           <v-select
@@ -19,7 +20,7 @@
             <label
               for="description"
               class="form-label">
-              
+
               Descrição:</label>
 
             <input
@@ -34,7 +35,7 @@
             <label
               for="value"
               class="form-label">
-              
+
               Valor adicionado:
             </label>
 
@@ -54,7 +55,7 @@
             <label
               for="date"
               class="form-label">
-              
+
               Data:
             </label>
 
@@ -71,12 +72,12 @@
             @click="addIncome()"
             type="submit"
             class="btn btn-primary">
-            
+
             Adicionar proveito
           </button>
         </div>
       </form>
-      
+
       <div class="mt-3"
         v-for="income in incomes"
         :key="income.id">
