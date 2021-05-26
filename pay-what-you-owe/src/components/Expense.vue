@@ -103,15 +103,23 @@
         :key="expense.id">
 
         {{ expense.name }}: {{ expense.type + ' com valor pendente de '}} {{ expense.value + '€'}}
-
-        <button
-          @click="totalExpenseByType()"
-          type="submit"
-          class="btn btn-primary">
-
-          Total
-        </button>
       </div>
+
+      <div class="mb-3">
+            <label
+              for="total"
+              class="form-label">
+
+              Total: {{ totalDepts }}
+            </label>
+
+            <div class="input-group mb-3">
+              <input
+                id="total"
+                type="number"
+                class="form-control">
+            </div>
+          </div>
 
 
       <Income />
@@ -134,8 +142,7 @@ export default {
         type: null,
         description: '',
         value: '',
-        date: '',
-        total: ''
+        date: ''
       },
 
       expenses: [],
@@ -174,6 +181,18 @@ export default {
     }
   },
 
+  computed: {
+    totalDepts () {
+      let a = this.types.map(a => a.totalExpense);
+      let sumExpenses = 0
+      for(let i = 0; i< a.length; i++) {
+        sumExpenses += a[i]
+      }
+      return sumExpenses
+    }
+
+  },
+
   methods: {
     addExpensive() {
       let newExpense = {
@@ -188,7 +207,6 @@ export default {
       this.expenses.push(newExpense)
 
       for (let i = 0; i < this.types.length; i++) {
-
         if (this.types[i].id === this.expense.type.id) {
           this.types[i].totalExpense += this.expense.value
         }
@@ -204,10 +222,6 @@ export default {
         value: '',
         date: ''
       }
-    },
-
-    totalExpenseByType() {
-      this.expenses.value = this.totalExpense
     }
   }
 }
