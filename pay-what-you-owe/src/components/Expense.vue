@@ -105,22 +105,24 @@
         {{ expense.name }}: {{ expense.type + ' com valor pendente de '}} {{ expense.value + '€'}}
       </div>
 
-      <div class="mb-3">
-            <label
-              for="total"
-              class="form-label">
+      <div class="mb-5">
+        <label
+          for="total"
+          class="form-label">
 
-              Total: {{ totalDepts }}
-            </label>
+          Total de valor em dívida:
+        </label>
 
-            <div class="input-group mb-3">
-              <input
-                id="total"
-                type="number"
-                class="form-control">
-            </div>
-          </div>
+        <div class="input-group mb-3">
+          <input
+            id="total"
+            type="text"
+            class="form-control"
+            v-model="totalDepts">
 
+          <span class="input-group-text">€</span>
+        </div>
+      </div>
 
       <Income />
     </div>
@@ -183,14 +185,14 @@ export default {
 
   computed: {
     totalDepts () {
-      let a = this.types.map(a => a.totalExpense);
+      let debt = this.types.map(debt => debt.totalExpense);
       let sumExpenses = 0
-      for(let i = 0; i< a.length; i++) {
-        sumExpenses += a[i]
+
+      for(let i = 0; i < debt.length; i++) {
+        sumExpenses += debt[i]
       }
       return sumExpenses
     }
-
   },
 
   methods: {
