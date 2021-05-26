@@ -21,7 +21,8 @@
               for="description"
               class="form-label">
 
-              Descrição:</label>
+              Descrição:
+            </label>
 
             <input
               id="description"
