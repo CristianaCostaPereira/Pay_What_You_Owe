@@ -1,10 +1,29 @@
 <template>
   <div>
     <div class="container">
-      <h1>Despesas</h1>
+      <h1 class="mb-3">Paga o que Deves</h1>
 
       <form @submit.prevent>
         <div class="mb-3">
+          <label
+            for="name"
+            class="form-label">
+
+            Nome:
+          </label>
+
+          <div class="input-group mb-3">
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              v-model="expense.name">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h3>Despesas</h3>
+
           <label class="form-label">Tipo de despesa:</label>
 
           <v-select
@@ -83,10 +102,10 @@
         v-for="expense in expenses"
         :key="expense.id">
 
-        {{ expense.type }}: {{ expense.value + '€'}}
+        {{ expense.name }}: {{ expense.type + ' com valor pendente de '}} {{ expense.value + '€'}}
       </div>
 
-      <income />
+      <Income />
     </div>
   </div>
 </template>
@@ -102,6 +121,7 @@ export default {
   data () {
     return {
       expense: {
+        name: '',
         type: null,
         description: '',
         value: '',
@@ -143,6 +163,7 @@ export default {
     addExpensive() {
       let newExpense = {
         id: this.expenses.length + 1,
+        name: this.expense.name,
         type: this.expense.type.description,
         description: this.expense.description,
         value: this.expense.value,
