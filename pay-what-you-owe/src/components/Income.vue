@@ -14,65 +14,67 @@
           </v-select>
         </div>
 
-        <div class="mb-3">
-          <label
-            for="description"
-            class="form-label">
-            
-            Descrição:</label>
+        <div v-if="income.type">
+          <div class="mb-3">
+            <label
+              for="description"
+              class="form-label">
+              
+              Descrição:</label>
 
-          <input
-            id="description"
-            type="text"
-            class="form-control"
-            placeholder="Descrição"
-            v-model="income.description">
-        </div>
-
-        <div class="mb-3">
-          <label
-            for="value"
-            class="form-label">
-            
-            Valor adicionado:
-          </label>
-
-          <div class="input-group mb-3">
             <input
-              id="value"
-              type="number"
+              id="description"
+              type="text"
               class="form-control"
-              placeholder="Valor"
-              v-model="income.value">
-
-            <span class="input-group-text">€</span>
+              placeholder="Descrição"
+              v-model="income.description">
           </div>
-        </div>
 
-        <div class="mb-3">
-          <label
-            for="date"
-            class="form-label">
+          <div class="mb-3">
+            <label
+              for="value"
+              class="form-label">
+              
+              Valor adicionado:
+            </label>
+
+            <div class="input-group mb-3">
+              <input
+                id="value"
+                type="number"
+                class="form-control"
+                placeholder="Valor"
+                v-model="income.value">
+
+              <span class="input-group-text">€</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label
+              for="date"
+              class="form-label">
+              
+              Data:
+            </label>
+
+            <div class="input-group mb-3">
+              <input
+                id="date"
+                type="date"
+                class="form-control"
+                v-model="income.date">
+            </div>
+          </div>
+
+          <button
+            @click="addIncome()"
+            type="submit"
+            class="btn btn-primary">
             
-            Data:
-          </label>
-
-          <div class="input-group mb-3">
-            <input
-              id="date"
-              type="date"
-              class="form-control"
-              v-model="income.date">
-          </div>
+            Adicionar proveito
+          </button>
         </div>
-
-        <button
-          @click="addIncome()"
-          type="submit"
-          class="btn btn-primary">
-          
-          Adicionar proveito
-        </button>
       </form>
       
       <div class="mt-3"
